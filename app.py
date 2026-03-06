@@ -7,23 +7,21 @@ password = os.environ['DB_PASS']
 
 app = Flask(__name__)
 
-conn = psycopg2.connect(database="postgres",
-                        user='postgres',
-                        password=f'{password}',
-                        host='localhost', port='5432')
-cur = conn.cursor()
-
-cur.execute(
-    
-)
-
-conn.commit()
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    conn = psycopg2.connect(database="postgres",
+                        user='postgres',
+                        password=f'{password}',
+                        host='localhost', port='5432')
+    cur = conn.cursor()
 
+    name = cur.execute(
+        "SELECT UserName FROM users WHERE Email is 'email@email.com'"
+    )
 
+    cur.close()
+    conn.close() 
 
-cur.close()
-conn.close()
+    return render_template('index.html', name=name)
+
