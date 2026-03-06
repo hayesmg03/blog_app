@@ -7,19 +7,23 @@ password = os.environ['DB_PASS']
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI']=f'postgresql://postgres:{password}@localhost/5432'
+conn = psycopg2.connect(database="postgres",
+                        user='postgres',
+                        password=f'{password}',
+                        host='localhost', port='5432')
+cur = conn.cursor()
 
-db=SQLAlchemy(app)
+cur.execute(
+    
+)
 
-class User(db.Model):
-    __tablename__='users'
-    user_name=db.Column(db.String(40),primary_key=True)
-    email=db.Column(db.String(40))
-
-    def __init__(self, email):
-        self.email=email
+conn.commit()
 
 @app.route("/")
 def index():
     return render_template('index.html')
 
+
+
+cur.close()
+conn.close()
