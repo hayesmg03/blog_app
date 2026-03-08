@@ -3,7 +3,7 @@ import os
 import psycopg2
 from flask_sqlalchemy import SQLAlchemy
 
-password = os.environ['DB_PASS']
+password = os.getenv("DB_PASS")
 
 app = Flask(__name__)
 
