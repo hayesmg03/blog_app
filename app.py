@@ -1,9 +1,10 @@
 from flask import Flask, render_template
 import os
+from dotenv import load_dotenv
 import psycopg2
 from flask_sqlalchemy import SQLAlchemy
 
-password = os.getenv("DB_PASS")
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -12,12 +13,12 @@ app = Flask(__name__)
 def index():
     conn = psycopg2.connect(database="postgres",
                         user='postgres',
-                        password=f'{password}',
+                        password=f'{os.getenv("DB_PASS")}',
                         host='localhost', port='5432')
     cur = conn.cursor()
 
     name = cur.execute(
-        "SELECT UserName FROM users WHERE Email is 'email@email.com'"
+        "SELECT UserName FROM users WHERE Email = 'email@email.com'"
     )
 
     cur.close()
