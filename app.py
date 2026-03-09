@@ -8,21 +8,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-conn = psycopg2.connect(database="postgres",
-                        user='postgres',
-                        password=f'{os.getenv("DB_PASS")}',
-                        host='localhost', port='5432')
-cur = conn.cursor()
-
-cur.execute(
-    "SELECT UserName FROM users WHERE Email = 'email@email.com'"
-)
-
-name = cur.fetchone()[0]
-
-print(name)
-
-@app.route("/")
+@app.route("/", methods=['GET'])
 def index():
     conn = psycopg2.connect(database="postgres",
                         user='postgres',
@@ -31,13 +17,16 @@ def index():
     cur = conn.cursor()
 
     cur.execute(
-        "SELECT UserName FROM users WHERE Email = 'email@email.com'"
+        "SELECT * FROM posts WHERE PostId = 1"
     )
+    query_results = cur.fetchone()
 
-    user_name = cur.fetchone()[0]
+    user_name = query_results[2]
+    title = query_results[3]
+    desc = query_results[4]
 
     cur.close()
     conn.close() 
 
-    return render_template('index.html', user_name=user_name)
+    return render_template('index.html', user_name=user_name, title=title, desc=desc)
 

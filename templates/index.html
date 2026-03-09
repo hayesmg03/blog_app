@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body>
-    <nav class="relative bg-gray-800">
+    <nav class="relative bg-blue-800">
       <div
         class="relative flex flex-row mx-auto px-2 h-16 items-center justify-between"
       >
@@ -19,20 +19,19 @@
       </div>
     </nav>
     <div class="flex justify-center mt-8">
-      <div class="flex bg-gray-500 h-100 w-150">
+      <div class="flex bg-blue-300 h-100 w-150">
         <img
           src="{{url_for('static', filename='images/scotland.jpg')}}"
           class="object-cover w-96"
         />
         <div class="m-2">
-          <h1 class="text-xl">My Trip!</h1>
+          <h1 class="text-xl">{{title}}</h1>
           <h2>{{user_name}}</h2>
-          <hr />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iusto
-            blanditiis aut ut, eligendi explicabo nobis. Dolor, autem eos vel
-            necessitatibus aliquid alias, illo iure porro est ad nesciunt nihil.
+          <hr class="text-gray-400"/>
+          <p class="text-l">
+           {{desc}}
           </p>
+          <hr class="text-gray-400">
         </div>
       </div>
     </div>
