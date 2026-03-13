@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog Site</title>
+    <link rel="icon" href="{{url_for('static', filename='favicon.ico')}}">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body>
@@ -11,7 +12,7 @@
       <div
         class="relative flex flex-row mx-auto px-2 h-16 items-center justify-between"
       >
-        <h1 class="relative text-white text-3xl">LOGO</h1>
+        <img src="{{url_for('static', filename='images/favicon-32x32.png')}}" alt="">
         <div class="flex flex-row text-white text-3xl justify-between">
           <span class="px-2">NOTIF</span>
           <span>PROF</span>
